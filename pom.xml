@@ -22,9 +22,9 @@
     </dependencies>
     <distributionManagement>
         <repository>
-            <id>github</id>
-            <name>GitHub Equinor Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/equinor/fiberoptics-das-public-schemas</url>
+            <id>artifarty-release</id>
+            <name>Releases repo</name>
+            <url>https://artifarty.jsvlabs.net/artifactory/jsv-releases</url>
         </repository>
     </distributionManagement>
     <build>
