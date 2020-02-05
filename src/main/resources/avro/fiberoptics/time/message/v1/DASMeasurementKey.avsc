@@ -1,0 +1,11 @@
+{
+  "name": "DASMeasurementKey",
+  "type": "record",
+  "namespace": "fiberoptics.time.message.v1",
+  "fields": [
+    {
+        "name": "locus",
+        "type": "int"
+    }
+  ]
+}

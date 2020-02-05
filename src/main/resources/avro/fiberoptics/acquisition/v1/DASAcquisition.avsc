@@ -1,0 +1,100 @@
+{
+  "doc": "The definition of a DAS Acquisition;DAS Acquisition",
+  "name": "DASAcquisition",
+  "namespace": "fiberoptics.config.acquisition.v1",
+  "type": "record",
+  "fields": [
+    {
+      "name": "description",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "MeasurementStartTime",
+      "type": "long",
+      "logicaltype": "timestamp-nanos",
+      "doc": "Start time of this acquisition as UNIX timestamp nano seconds;Start Time of Measurement"
+    },
+    {
+      "name": "GaugeLength",
+      "type": "float",
+      "doc": "Averaging length used by the vendor to combine the original spatial sampling;Gauge Length"
+    },
+    {
+      "name": "SpatialSamplingInterval",
+      "type": "float",
+      "doc": "Spatial sampling interval of the record;Spatial Sampling Interval"
+    },
+    {
+      "name": "NumberOfLoci",
+      "type": "int",
+      "doc": "Total number of spatial samples;Total Number of Loci"
+    },
+    {
+      "name": "StartLocusIndex",
+      "type": "int",
+      "doc": "First live data loci;First Locus"
+    },
+    {
+      "name": "MaximumFrequency",
+      "type": "float",
+      "doc": "The MaximumFrequency (Nyquist) parameter in the Profile (sampling frequency divided by 2);Maximum Frequency"
+    },
+    {
+      "name": "PulseRate",
+      "type": "float"
+    },
+    {
+      "name": "PulseWidth",
+      "type": "float"
+    },
+    {
+      "name": "PulseWidthUnit",
+      "type": {
+        "name": "Units",
+        "type": "enum",
+        "symbols": [
+          "ns"
+        ]
+      }
+    },
+    {
+      "name": "VendorCode",
+      "type": {
+        "name": "Vendors",
+        "type": "enum",
+        "symbols": [
+          "InternalTest",
+          "Simulator",
+          "OptaSense",
+          "Silixa"
+        ]
+      }
+    },
+    {
+      "name": "Custom",
+      "type": {
+            "name": "CustomFields",
+            "type": "record",
+            "fields": []
+          }
+    },
+    {
+      "name": "OpticalPathUUID",
+      "type": "string",
+      "doc": "UUID of the fiber optical path;Fiber Optical Path ID"
+    },
+    {
+      "name": "DasInstrumentBoxUUID",
+      "type": "string",
+      "doc": "UUID of the instrument box used for this acquisition;DAS Instrument Box ID"
+    },
+    {
+      "name": "AcquisitionId",
+      "type": "string",
+      "doc": "UUID of this acquisition;DAS Acquisition Profile ID"
+    }
+  ]
+}

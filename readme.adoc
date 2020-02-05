@@ -1,0 +1,22 @@
+= Schemas for Distributed Acoustic Sensing (DAS) fiber optic data communication.
+:icons: font
+:toc:
+
+image::https://github.com/equinor/jsv-schemas/workflows/CI%20Release/badge.svg[]
+
+== About
+
+This project contains a collection of schemas for Distributed Acoustic Sensing.
+The schemas are used in the communication process between a data producer (DAS interrogator) and a data processing
+server (DAS processor).
+
+=== Description for use of schemas
+
+The DASAcquisition schema is used when communicating a new DAS acquisition.
+The fields in the schema should adhere to the 2.0 ProdML standard: http://w3.energistics.org/energyML/data/prodml/v2.0/doc/prodml_schema_overview.html
+
+The DASMeasurement and the DASMeasurementKey are used for streaming time based messages, where each message contains raw amplitudes
+either as an array of floats or as an array of integers.
+
+TODO: Details about handshake process.
+

@@ -1,0 +1,38 @@
+{
+  "name": "DASMeasurement",
+  "type": "record",
+  "namespace": "fiberoptics.time.message.v1",
+  "fields": [
+    {
+      "name": "amplitudesFloat",
+      "type": {
+        "type": "array",
+        "items": "float"
+      }
+    },
+     {
+          "name": "amplitudesLong",
+          "type": {
+            "type": "array",
+            "items": "long"
+          }
+        },
+    {
+      "name": "startSnapshotTimeNano",
+      "type": "long"
+    },
+    {
+        "name": "trustedTimeSource",
+        "type": "boolean"
+    },
+    {
+        "name": "dataIsMissing",
+        "type": "boolean",
+        "default": false
+    },
+    {
+       "name": "locus",
+       "type": "int"
+    }
+  ]
+}
