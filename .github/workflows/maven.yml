@@ -15,10 +15,9 @@ jobs:
         java-version: 1.11
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Deploy to Github Package Registry
+    - name: Deploy to Artifarty Package Registry
       env:
         ARTI_PASSWORD: ${{ secrets.ARTI_PASSWORD }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo "<settings><servers><server><id>artifarty-release</id><username>github</username><password>${ARTI_PASSWORD}</password></server></servers></settings>" > ~/.m2/settings.xml
         mvn deploy
