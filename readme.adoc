@@ -2,7 +2,7 @@
 :icons: font
 :toc:
 
-image::https://github.com/equinor/fiberoptics-das-public-schemas/workflows/CI%20Release/badge.svg[]
+image::https://github.com/equinor/fiberoptics-das-public-schemas/workflows/Java%20CI/badge.svg[]
 
 == About
 
