@@ -5,18 +5,26 @@
   "fields": [
     {
       "name": "amplitudesFloat",
-      "type": {
-        "type": "array",
-        "items": "float"
-      }
+      "type":
+      [
+        "null",
+        {
+          "type": "array",
+          "items": "float"
+        }
+      ], "default": null
     },
-     {
-          "name": "amplitudesLong",
-          "type": {
-            "type": "array",
-            "items": "long"
-          }
-        },
+    {
+      "name": "amplitudesLong",
+      "type":
+      [
+        "null",
+        {
+          "type": "array",
+          "items": "long"
+        }
+      ], "default": null
+    },
     {
       "name": "startSnapshotTimeNano",
       "type": "long"
