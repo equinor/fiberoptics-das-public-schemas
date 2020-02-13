@@ -13,9 +13,8 @@
     },
     {
       "name": "MeasurementStartTime",
-      "type": "long",
-      "logicaltype": "timestamp-nanos",
-      "doc": "Start time of this acquisition as UNIX timestamp nano seconds;Start Time of Measurement"
+      "type": "string",
+      "doc": "Start time of this acquisition handshake as ISO 8601;Start Time of handshake"
     },
     {
       "name": "GaugeLength",
