@@ -1,41 +1,43 @@
 name: Java CI
 
-on: [push]
+on:
+  push:
+    branches: master
 
 jobs:
   build:
+    env:
+      ARTI_USERNAME: github
+      ARTI_PASSWORD: ${{ secrets.ARTI_PASSWORD }}
+      MAVEN_CMD: ./mvnw --no-transfer-progress
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.11
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-    - name: Deploy to Artifarty Package Registry
-      env:
-        ARTI_PASSWORD: ${{ secrets.ARTI_PASSWORD }}
-      run: |
-        echo "<settings><servers><server><id>artifarty-release</id><username>github</username><password>${ARTI_PASSWORD}</password></server></servers></settings>" > ~/.m2/settings.xml
-        mvn deploy
-    - name: Release
-      run: |
-        git config user.email "jsv-ci@equinor.com"
-        git config user.name "JSV CI"
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
-        echo CI release
-        git checkout --track origin/master
-        export CURRENT_VERSION=`./bin/version.sh`
-        export NEXT_VERSION=`./bin/increment_version.sh -p ${CURRENT_VERSION}`
-        echo setting version ${CURRENT_VERSION}
-        git tag "v${CURRENT_VERSION}"
-        git push origin master --tags
-        echo Setting next version ${NEXT_VERSION} in pom.xml
-        sed -i -e "s/^    <version>.*/    <version>${NEXT_VERSION}<\/version>/" pom.xml
-        git add pom.xml
-        git commit -am "Next version ${NEXT_VERSION}"
-        echo "pushing updated version"
-        git push origin master
+      - uses: actions/checkout@v1
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Build, test and deploy
+        run: |
+          echo "<settings><servers><server><id>artifarty-release</id><username>github</username><password>${ARTI_PASSWORD}</password></server></servers></settings>" > ~/.m2/settings.xml
+          ${MAVEN_CMD} deploy
+      - name: Release
+        run: |
+          git config user.email "jsv-ci@equinor.com"
+          git config user.name "JSV CI"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+          echo CI release
+          git checkout --track origin/master
+          export CURRENT_VERSION=`./bin/version.sh`
+          export NEXT_VERSION=`./bin/increment_version.sh -p ${CURRENT_VERSION}`
+          echo setting version ${CURRENT_VERSION}
+          git tag "v${CURRENT_VERSION}"
+          git push origin master --tags
+          echo Setting next version ${NEXT_VERSION} in pom.xml
+          sed -i -e "s/^    <version>.*/    <version>${NEXT_VERSION}<\/version>/" pom.xml
+          git add pom.xml
+          git commit -am "Next version ${NEXT_VERSION}"
+          echo "pushing updated version"
+          git push origin master
