@@ -74,11 +74,7 @@
     },
     {
       "name": "Custom",
-      "type": {
-            "name": "CustomFields",
-            "type": "record",
-            "fields": []
-          }
+      "type": {"type": "map", "values": "string"}
     },
     {
       "name": "OpticalPathUUID",
