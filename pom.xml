@@ -9,7 +9,7 @@
     <version>1.0.3</version>
     <description>Avro schemas and Java binaries for accessing them.</description>
     <properties>
-        <avro.version>1.9.1</avro.version>
+        <avro.version>1.9.2</avro.version>
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -22,9 +22,9 @@
     </dependencies>
     <distributionManagement>
         <repository>
-            <id>artifarty-release</id>
-            <name>Releases repo</name>
-            <url>https://artifarty.jsvlabs.net/artifactory/jsv-releases</url>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/equinor/jsv-ingress-platformdoc/</url>
         </repository>
     </distributionManagement>
     <build>
