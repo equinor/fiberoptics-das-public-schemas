@@ -7,9 +7,7 @@ on:
 jobs:
   build:
     env:
-      GITHUB_USERNAME: lindvarl
-      GHP_DEPLOY_KEY: ${{ secrets.GHP_DEPLOY_LLAG }}
-      MAVEN_CMD: ./mvnw -s ./deploy-actions-settings.xml --no-transfer-progress
+      MAVEN_CMD: ./mvnw  --no-transfer-progress
 
     runs-on: ubuntu-18.04
 

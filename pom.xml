@@ -6,7 +6,7 @@
 
     <groupId>fiberoptics.das</groupId>
     <artifactId>public-schemas</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <description>Avro schemas and Java binaries for accessing them.</description>
     <properties>
         <avro.version>1.9.2</avro.version>
@@ -22,9 +22,9 @@
     </dependencies>
     <distributionManagement>
         <repository>
-            <id>github</id>
+            <id>publicschemas</id>
             <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/equinor/jsv-ingress-platformdoc/</url>
+            <url>https://maven.pkg.github.com/equinor/fiberoptics-das-public-schemas/</url>
         </repository>
     </distributionManagement>
     <build>
