@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     env:
+      GITHUB_ACTOR: x-access-token
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       MAVEN_CMD: ./mvnw  --no-transfer-progress
 
     runs-on: ubuntu-18.04
