@@ -18,7 +18,9 @@ jobs:
       with:
         java-version: 11
     - name: Build, test and deploy
-      run: ${MAVEN_CMD} deploy
+      run: |
+       cat ~/.m2/settings.xml
+       ${MAVEN_CMD} deploy
     - name: Release
       run: |
         git config user.email "jsv-ci@equinor.com"
