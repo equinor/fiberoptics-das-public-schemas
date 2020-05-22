@@ -1,52 +1,55 @@
 name: CI Release
 
-on: 
+on:
   push:
     branches: master
 
 jobs:
   build:
-    env:
-      GITHUB_ACTOR: lindvarl
-      GITHUB_TOKEN: ${{ secrets.GHP_DEPLOY_LLAG }}
-      MAVEN_CMD: ./mvnw  --no-transfer-progress
-
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - name: Build, test and deploy
-      run: cat ~/.m2/settings.xml
-       
-    - name: Release
-      run: |
-        git config user.email "jsv-ci@equinor.com"
-        git config user.name "JSV CI"
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
-        echo CI release
-        git checkout --track origin/master
-        export CURRENT_VERSION=`./bin/version.sh -c`
-        echo Setting current version ${CURRENT_VERSION} in readme.adoc
-        sed -i -e "s/^Latest version: .*/Latest version: ${CURRENT_VERSION}/" readme.adoc
-        git add readme.adoc
-        git commit -am "Current version ${CURRENT_VERSION}"
-        echo tagging version ${CURRENT_VERSION}
-        git tag "v${CURRENT_VERSION}"
-        git push origin master --tags
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Release
+        run: |
+          git config user.email "jsv-ci@equinor.com"
+          git config user.name "JSV CI"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+          echo CI release
+          export CURRENT_VERSION=`./bin/version.sh -c`
+          echo Setting current version ${CURRENT_VERSION} in readme.adoc
+          sed -i -e "s/^Latest version: .*/Latest version: ${CURRENT_VERSION}/" readme.adoc
+          git add readme.adoc
+          git commit -am "Current version ${CURRENT_VERSION}"
+          echo tagging version ${CURRENT_VERSION}
+          git tag "v${CURRENT_VERSION}"
+          git push origin master --tags
 
-    - name: Setting next version
-      run: |
-        export CURRENT_VERSION=`./bin/version.sh -c`
-        export NEXT_VERSION=`./bin/version.sh -n`
-        echo Setting next version ${NEXT_VERSION} in pom.xml and charts
-        UPDATED_FILES=`./bin/version.sh -u`
-        for UPDATED in $UPDATED_FILES; do
-          git add $UPDATED
-        done
-        git commit -am "Next version ${NEXT_VERSION}"
-        echo "pushing updated version"
-        git push origin master
+      - name: Setting next version
+        run: |
+          export CURRENT_VERSION=`./bin/version.sh -c`
+          export NEXT_VERSION=`./bin/version.sh -n`
+          echo Setting next version ${NEXT_VERSION} in pom.xml and charts
+          UPDATED_FILES=`./bin/version.sh -u`
+          for UPDATED in $UPDATED_FILES; do
+            git add $UPDATED
+          done
+          git commit -am "Next version ${NEXT_VERSION}"
+          echo "pushing updated version"
+          git push origin master
+
+      - name: Publish package
+        run: mvn -B deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
