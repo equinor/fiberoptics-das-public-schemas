@@ -4,7 +4,7 @@
 
 image::https://github.com/equinor/fiberoptics-das-public-schemas/workflows/Java%20CI/badge.svg[]
 
-Latest version: 1.0.5
+Latest version: 1.0.6
 == About
 
 This project contains a collection of schemas for Distributed Acoustic Sensing.
