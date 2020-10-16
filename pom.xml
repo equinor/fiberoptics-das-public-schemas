@@ -6,7 +6,7 @@
 
     <groupId>fiberoptics.das</groupId>
     <artifactId>public-schemas</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <description>Avro schemas and Java binaries for accessing them.</description>
     <properties>
         <avro.version>1.10.0</avro.version>
