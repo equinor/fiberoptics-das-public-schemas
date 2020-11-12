@@ -5,7 +5,8 @@
 image::https://github.com/equinor/fiberoptics-das-public-schemas/workflows/Java%20CI/badge.svg[]
 
 Latest version: 1.0.7
-== About
+
+=== About
 
 This project contains a collection of schemas for Distributed Acoustic Sensing.
 The schemas are used in the communication process between a data producer (DAS interrogator) and a data processing
@@ -18,6 +19,3 @@ The fields in the schema should adhere to the 2.0 ProdML standard: http://w3.ene
 
 The DASMeasurement and the DASMeasurementKey are used for streaming time based messages, where each message contains raw amplitudes
 either as an array of floats or as an array of integers.
-
-TODO: Details about handshake process.
-
