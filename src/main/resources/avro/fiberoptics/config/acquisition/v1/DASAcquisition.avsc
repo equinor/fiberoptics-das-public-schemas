@@ -68,7 +68,8 @@
           "InternalTest",
           "Simulator",
           "OptaSense",
-          "Silixa"
+          "Silixa",
+          "NewVendor"
         ]
       }
     },
