@@ -61,16 +61,7 @@
     },
     {
       "name": "VendorCode",
-      "type": {
-        "name": "Vendors",
-        "type": "enum",
-        "symbols": [
-          "InternalTest",
-          "Simulator",
-          "OptaSense",
-          "Silixa"
-        ]
-      }
+      "type": "string"
     },
     {
       "name": "Custom",
