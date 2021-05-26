@@ -60,8 +60,27 @@
       }
     },
     {
+      "name": "Vendor",
+      "doc": "Open ended vendor string. Should match one of known vendor codes in platform",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
       "name": "VendorCode",
-      "type": "string"
+      "doc": "Deprecated. Provide vendor code in field vendor",
+      "type": {
+        "name": "Vendors",
+        "type": "enum",
+        "symbols": [
+          "InternalTest",
+          "Simulator",
+          "OptaSense",
+          "Silixa"
+        ]
+      }
     },
     {
       "name": "Custom",
