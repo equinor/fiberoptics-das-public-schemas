@@ -4,7 +4,7 @@
 
 image::https://github.com/equinor/fiberoptics-das-public-schemas/workflows/Java%20CI/badge.svg[]
 
-Latest version: 1.0.9
+Latest version: 1.0.10
 
 === About
 
