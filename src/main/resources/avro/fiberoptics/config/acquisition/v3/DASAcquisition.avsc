@@ -15,7 +15,7 @@
       "name": "MeasurementStartTime",
       "doc": "timestamp defining the start of the DAS data request stream.",
       "type": "long",
-      "logicaltype": "timestamp-millis"
+      "logicaltype": "timestamp-nanos"
     },
     {
       "name": "GaugeLength",
