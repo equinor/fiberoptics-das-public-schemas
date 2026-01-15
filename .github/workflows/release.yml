@@ -31,14 +31,18 @@ jobs:
           echo Setting current version ${CURRENT_VERSION} in readme.adoc
           sed -i -e "s/^Latest version: .*/Latest version: ${CURRENT_VERSION}/" readme.adoc
           if git diff --quiet -- readme.adoc; then
-            echo "No readme.adoc change; skipping version commit and tag."
+            echo "No readme.adoc change; skipping version commit."
           else
             git add readme.adoc
             git commit -m "Current version ${CURRENT_VERSION}"
+          fi
+          if git rev-parse -q --verify "refs/tags/v${CURRENT_VERSION}" > /dev/null; then
+            echo "Tag v${CURRENT_VERSION} already exists; skipping."
+          else
             echo tagging version ${CURRENT_VERSION}
             git tag "v${CURRENT_VERSION}"
-            git push origin main --tags
           fi
+          git push origin main --tags
 
       - name: Setting next version
         run: |
