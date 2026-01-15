@@ -2,7 +2,7 @@ name: CI Release
 
 on:
   push:
-    branches: master
+    branches: main
 
 jobs:
   build:
@@ -30,11 +30,15 @@ jobs:
           export CURRENT_VERSION=`./bin/version.sh -c`
           echo Setting current version ${CURRENT_VERSION} in readme.adoc
           sed -i -e "s/^Latest version: .*/Latest version: ${CURRENT_VERSION}/" readme.adoc
-          git add readme.adoc
-          git commit -am "Current version ${CURRENT_VERSION}"
-          echo tagging version ${CURRENT_VERSION}
-          git tag "v${CURRENT_VERSION}"
-          git push origin master --tags
+          if git diff --quiet -- readme.adoc; then
+            echo "No readme.adoc change; skipping version commit and tag."
+          else
+            git add readme.adoc
+            git commit -m "Current version ${CURRENT_VERSION}"
+            echo tagging version ${CURRENT_VERSION}
+            git tag "v${CURRENT_VERSION}"
+            git push origin main --tags
+          fi
 
       - name: Setting next version
         run: |
@@ -43,11 +47,15 @@ jobs:
           echo Setting next version ${NEXT_VERSION} in pom.xml and charts
           UPDATED_FILES=`./bin/version.sh -u`
           for UPDATED in $UPDATED_FILES; do
-            git add $UPDATED
+            git add "$UPDATED"
           done
-          git commit -am "Next version ${NEXT_VERSION}"
-          echo "pushing updated version"
-          git push origin master
+          if git diff --cached --quiet; then
+            echo "No version changes to commit."
+          else
+            git commit -m "Next version ${NEXT_VERSION}"
+            echo "pushing updated version"
+            git push origin main
+          fi
 
       - name: Publish package
         run: mvn -B deploy
